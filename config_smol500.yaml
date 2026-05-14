@@ -1,0 +1,68 @@
+# config_phi3v.yaml
+
+# Trainer arguments
+training_args:
+  epochs: 10
+  batch_size: 10
+  num_workers: 6
+  accelerator: gpu # Can be 'gpu', 'cpu', 'tpu', 'auto'
+#  devices: 2 # Number of GPUs
+  strategy: auto # Use DDPStrategy for multi-GPU, or 'auto'
+  output_dir: "/gpfs2/scratch/ychen57/code/LightVec/output/"
+  bf16: bool  # Add bf16 argument
+  lr_scheduler: 'linear'
+  steps_per_epoch: None
+  warmup_steps: 100
+  save_steps: None
+  per_device_train_batch_size: None
+  report_to: "wandb"
+  image_encoder_freeze: False
+  project_name: None
+  logging_steps: 1
+#  num_train_epochs: 1
+#  grad_cache: True
+#  gc_q_chunk_size: 2
+#  gc_p_chunk_size: 2
+
+# Model arguments (for MMEBModule's __init__)
+model_args:
+#  model_name_or_path: microsoft/Phi-3.5-vision-instruct
+#  model_backbone: "phi3_v"
+
+#  "HuggingFaceTB/SmolVLM-256M-Instruct"
+#  "smolvlm"
+  model_name_or_path: 'HuggingFaceTB/SmolVLM-500M-Instruct'
+  model_backbone: 'smolvlm' # <<< Change this in your config
+  processor_name: None
+  model_type: None
+  checkpoint_path: None
+  frozen: False
+  pooling: 'last'
+  temperature: 0.02
+  normalize: True
+  embedding_dim: 768  # Match your actual model's input
+  output_dim: 256 # Match your actual model's output
+  learning_rate: 1e-4
+  weight_decay: 0.01
+  encoder: False
+  lora: True
+  lora_r: 16
+  lora_alpha: 64
+  lora_dropout: 0.1
+  lora_target_modules: "qkv_proj,o_proj,gate_up_proj,down_proj,k_proj,q_proj,out_proj,v_proj"
+  num_crops: 16
+  image_size: 512
+  image_token_id: 49190
+  col_row_token_id: [49153,49154,49155,49159,49160,49161,49165,49166,49167]
+
+# DataModule arguments (for GeoTextDataModule's __init__)
+data_args:
+  shuffle_train: True
+  json_path: /gpfs2/scratch/ychen57/Datasets/GeoText/vec/
+  subset_name: geo_drone_i2t-spatial
+# dataset_path: /gpfs2/scratch/ychen57/Datasets/GeoText/
+  dataset_name: 'GeoText'
+  image_dir: /gpfs2/scratch/ychen57/Datasets/GeoText/
+  encode_output_path: None
+  max_len: 300
+  embedding_type: ""
