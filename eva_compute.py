@@ -1,5 +1,5 @@
 import numpy as np
-import gc # 导入垃圾回收模块
+import gc
 import argparse
 import os
 import json
@@ -12,7 +12,7 @@ def check_matrix(mat, name):
         print(f"WARNING: {name} contains inf!")
     if np.any(np.isnan(mat)):
         print(f"WARNING: {name} contains NaN!")
-    if np.max(np.abs(mat)) > 1e10:  # 自定义阈值
+    if np.max(np.abs(mat)) > 1e10:  
         print(f"WARNING: {name} has extreme values (max={np.max(mat)})")
 
 
@@ -127,7 +127,7 @@ def compute_recall_at_k(cur_query_ids: np.ndarray, preds_id: np.ndarray, ks: tup
     return recalls
 
 def vis(sim_qry2pos, checkpoint_to_eval, image_dir, image_file_name, type):
-    with open("/gpfs2/scratch/ychen57/Datasets/GeoText/geo_all_t2i_eva.json", 'r', encoding='utf-8') as f:
+    with open("/gpfs2/scratch/ychen57/Datasets/GeoText/geo_t2i_eva.json", 'r', encoding='utf-8') as f:
         data = json.load(f)
 
 
@@ -211,30 +211,25 @@ if __name__ == "__main__":
     dataset = args.dataset
     subset = args.subset
 
-    if args.checkpoint_to_eval in [None, "None"]:
-        path = '/gpfs2/scratch/ychen57/code/LightVec/clip_cache/'
-        qry_embeddings_path = path + 'qry.npy'
-        pos_embeddings_path = path + 'pos.npy'
-        ids_path = path + 'ids.npy'
+    
+    if '-v' in args.checkpoint_to_eval:
+        epoch = args.checkpoint_to_eval.replace('.ckpt', '').split('/')[-1].split('-v')[-1]
+    if 'Epoch' in args.checkpoint_to_eval:
+        epoch = args.checkpoint_to_eval.replace('.ckpt', '').split('/')[-1].split('Epoch')[-1]
+    elif 'last' in args.checkpoint_to_eval:
+        epoch = 'last'
     else:
-        if '-v' in args.checkpoint_to_eval:
-            epoch = args.checkpoint_to_eval.replace('.ckpt', '').split('/')[-1].split('-v')[-1]
-        if 'Epoch' in args.checkpoint_to_eval:
-            epoch = args.checkpoint_to_eval.replace('.ckpt', '').split('/')[-1].split('Epoch')[-1]
-        elif 'last' in args.checkpoint_to_eval:
-            epoch = 'last'
-        else:
-            assert 'cannot find epoch' in args.checkpoint_to_eval
-        eval_output_base_dir = args.checkpoint_to_eval.split(os.path.basename(args.checkpoint_to_eval))[0]
-        print("eval output base dir: {}".format(eval_output_base_dir))
-        if 'text2' in args.subset:
-            # path = os.path.join(eval_output_base_dir, "cached_features/", args.subset + "/")
-            path = os.path.join(eval_output_base_dir, "cached_features/")
-        else:
-            path = os.path.join(eval_output_base_dir, "cached_features/")
-        qry_embeddings_path = path+'qry_embeddings'+'_Epoch'+epoch+'.npy'
-        pos_embeddings_path = path+'pos_embeddings'+'_Epoch'+epoch+'.npy'
-        ids_path = path+'ids'+'_Epoch'+epoch+'.npy'
+        assert 'cannot find epoch' in args.checkpoint_to_eval
+    eval_output_base_dir = args.checkpoint_to_eval.split(os.path.basename(args.checkpoint_to_eval))[0]
+    print("eval output base dir: {}".format(eval_output_base_dir))
+    if 'text2' in args.subset:
+        # path = os.path.join(eval_output_base_dir, "cached_features/", args.subset + "/")
+        path = os.path.join(eval_output_base_dir, "cached_features/")
+    else:
+        path = os.path.join(eval_output_base_dir, "cached_features/")
+    qry_embeddings_path = path+'qry_embeddings'+'_Epoch'+epoch+'.npy'
+    pos_embeddings_path = path+'pos_embeddings'+'_Epoch'+epoch+'.npy'
+    ids_path = path+'ids'+'_Epoch'+epoch+'.npy'
 
 
     all_qry_tensor_np = np.load(qry_embeddings_path)
