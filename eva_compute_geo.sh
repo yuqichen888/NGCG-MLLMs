@@ -12,7 +12,7 @@
 
 
 python eva_compute.py \
-   --checkpoint_to_eval  "/gpfs2/scratch/ychen57/code/LightVec/output/checkpoints/smol500_1839233_BS30_LR3e-05_Dgeo_t2i_Aug-geometry_T0.03_ImgRes-512_lr3e-05/smol500_1839233_BS30_LR3e-05_Dgeo_t2i_Aug-geometry_T0.03_ImgRes-512_lr3e-05smol500_1839233_BS30_LR3e-05_Dgeo_t2i_Aug-geometry_T0.03_ImgRes-512_lr3e-05_Epoch-epoch=19.ckpt" \
+   --checkpoint_to_eval "<your path here>" \
    --dataset "GeoText" \
-   --subset 'geo_all_t2i' \
+   --subset 'geo_t2i' \
    --task 'image2text'
