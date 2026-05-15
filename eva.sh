@@ -19,8 +19,8 @@ module load cuda/12.4.1
 
 cd /gpfs2/scratch/ychen57/code/LightVec
 python eva.py \
-    --config_path /gpfs2/scratch/ychen57/code/LightVec/config.yaml \
-    --checkpoint_to_eval /gpfs2/scratch/ychen57/code/LightVec/src/vlm_backbone/smolvlm/ \
+    --config_path ./config.yaml \
+    --checkpoint_to_eval ./src/vlm_backbone/smolvlm/ \
     --eval_batch_size 4 \
     --eval_output_dir ./my_eval_results \
     --device cuda:0
