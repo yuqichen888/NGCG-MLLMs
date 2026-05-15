@@ -13,16 +13,14 @@
 
 echo "SLURM Job ID from ENV: ${SLURM_JOB_ID}" # For debugging
 CUDA_VISIBLE_DEVICES=0 torchrun --standalone --nproc_per_node=1 train.py \
-    --config_path /gpfs2/scratch/ychen57/code/LightVec/config_internvl3_5.yaml \
+    --config_path config_internvl3_5.yaml \
     --epochs 20 \
     --batch_size 10 \
     --lora True \
     --job_name_from_slurm "geotext_${SLURM_JOB_ID}" \
     --dataset_name 'GeoText' \
     --subset_name 'geo_t2i' \
-    --augmentation 'geometry_without_Elastic' \
     --device 'gpu' \
-    --temperature 0.03 \
     --warmup_ratio 0.01 \
     --head_num 1 \
     --query 1 \
