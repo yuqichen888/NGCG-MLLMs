@@ -77,6 +77,8 @@ data/
 │   │   └── <city>/
 │   ├── text2sate_<city>_train.json
 │   └── text2sate_<city>_test.json
+│   ├── text2osm_<city>_train.json
+│   └── text2osm_<city>_test.json
 └── GeoText/
     ├── images/
     │   ├── train/
