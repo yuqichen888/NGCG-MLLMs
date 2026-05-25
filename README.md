@@ -181,4 +181,4 @@ If you find this work useful, please cite:
 
 ## 📧 Contact
 
-For questions about the paper or code, please open a GitHub issue or contact **Yuqi Chen**.
+For questions about the paper or code, please open a GitHub issue or contact **Yuqi Chen** by email yuqi.chen@uvm.edu.
