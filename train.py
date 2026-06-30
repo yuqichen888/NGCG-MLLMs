@@ -23,7 +23,7 @@ import wandb
 
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 num_workers = int(os.environ.get('SLURM_CPUS_PER_TASK', 2))
-wandb.login(key="961e91328b60ae852b2c13c222d71175ec1ec591")
+
 
 def _freeze_params(module):
     for param in module.parameters():
