@@ -87,7 +87,7 @@ data/
     └── geo_t2i_test.json
 ```
 
-All JSON files follow the original dataset author's format. We augment each entry with four additional fields to unify the retrieval pipeline — see [Configuration & Data Fields](#️-configuration--data-fields) for details. We also provide the processed JSON documents via this [OneDrive folder](https://uvmoffice-my.sharepoint.com/:f:/g/personal/ychen57_uvm_edu/EIgALFcBuj8J5QJ_deKyVG0YrAUFVkm5P6ifLBLAb7BdGfGE?e=2wVaky).
+All JSON files follow the original dataset author's format. We augment each entry with four additional fields to unify the retrieval pipeline — see [Configuration & Data Fields](#️-configuration--data-fields) for details. We also provide the processed JSON documents via this [OneDrive folder](https://uvmoffice-my.sharepoint.com/:f:/g/personal/ychen57_uvm_edu/IgALFcBuj8J5QJ_deKyVG0YrAUFVkm5P6ifLBLAb7BdGfGE?e=4xppfb).
 
 ---
 
